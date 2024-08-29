@@ -8,14 +8,12 @@ def anio_bisiesto(anio):
 
 # b. Las múltiples sentencias if la función dia_mes utilicen la cláusula in en lugar de varias cláusulas or
 def calcular_dias_mes(mes, anio_bisiesto):
-    if mes == 1 or mes == 3 or mes == 5 or mes == 7 or mes == 8 or mes == 10 or mes == 12:
+    if mes in {1, 3, 5, 7, 8, 10, 12}:
         return 31
-    elif mes == 4 or mes == 6 or mes == 9 or mes == 11:
+    elif mes in {4, 6, 9, 11}:
         return 30
-    elif mes == 2 and anio_bisiesto == True:
-        return 29
-    elif mes == 2 and anio_bisiesto == False:
-        return 28
+    elif mes == 2:
+        return 29 if anio_bisiesto else 28
     
 #c. Se agregue una sentencia que valide que la edad ingresada por el usuario es numérica.
 def validar_edad (edad):

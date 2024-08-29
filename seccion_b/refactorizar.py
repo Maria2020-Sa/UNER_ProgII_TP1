@@ -13,14 +13,24 @@ anio_fin = anio_comienzo + anios
 meses = anios * 12 + hora_local.tm_mon
 dias = 0
 
-# calcular los dias
-for a in range(anio_comienzo, anio_fin):
-    if (anio_bisiesto(a)): dias = dias + 366
-else: dias = dias + 365
+def calcular_edad_en_dias(hora_local, anio_comienzo, anio_fin):
+    dias = 0
 
-# agregar los días transcurridos en este año
-for m in range(1, hora_local.tm_mon):
-    dias = dias + calcular_dias_mes(m, anio_bisiesto(hora_local.tm_year))
+    # Calcular los días completos en los años entre anio_comienzo y anio_fin
+    for a in range(anio_comienzo, anio_fin):
+        if anio_bisiesto(a):
+            dias += 366
+        else:
+            dias += 365
+
+    # Agregar los días transcurridos en el año actual
+    for m in range(1, hora_local.tm_mon):
+        dias += calcular_dias_mes(m, anio_bisiesto(hora_local.tm_year))
+    
+    # Agregar los días del mes actual
+    dias += hora_local.tm_mday
+
+    return dias
 
 # agregar los días transcurridos en este mes
 dias = dias + hora_local.tm_mday
